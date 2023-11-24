@@ -9,25 +9,32 @@
 <body>
     <div class="container">
         <div class="box">
-            <form>
+            <form action="/cadastro" id="form_cadastro" method="post">
                 <p id="ipessoal">Informações Pessoais</p>
+
                 <label for="nome">Nome</label><br><br>
                 <input type="text" name="nome" required placeholder="Nome"><br><br>
+
                 <label for="sobrenome">Sobrenome</label><br><br>
                 <input type="text" name="sobrenome" required placeholder="Sobrenome"><br><br>
+
                 <label for="documento_cpf">Documento(CPF)</label><br><br>
                 <input type="text" name="documento_cpf" required placeholder="CPF"><br><br>
+
                 <label for="documento_rg">Documento(RG)</label><br><br>
                 <input type="text" name="documento_rg" required placeholder="RG"><br><br>
+
                 <div class="mid">
                     <label for="data_nasc">Data de Nascimento</label>
                     <label for="telefone" id="rigth">Telefone</label>
                 </div>
+
                 <div class="mid1">
                     <input type="date" name="data_nasc" class="mid1" id="tam" placeholder="Data">
                     <input type="tel" name="telefone" class="mid1" id="tam"  placeholder="(xx) xxxxx-xxxx">
                 </div>
-                
+
+                <button type="submit" id="bt_cria_cadrastro" >Criar Cadastro</button>
             
             </form>
         </div>
