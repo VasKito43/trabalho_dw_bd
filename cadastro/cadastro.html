@@ -10,19 +10,24 @@
     <div class="container">
         <div class="box">
             <form>
-                <p>Informações Pessoais</p>
-                <label for="nome">Nome:</label><br><br>
+                <p id="ipessoal">Informações Pessoais</p>
+                <label for="nome">Nome</label><br><br>
                 <input type="text" name="nome" required placeholder="Nome"><br><br>
-                <label for="sobrenome">Sobrenome:</label><br><br>
+                <label for="sobrenome">Sobrenome</label><br><br>
                 <input type="text" name="sobrenome" required placeholder="Sobrenome"><br><br>
-                <label for="documento_cpf">Documento(CPF):</label><br><br>
+                <label for="documento_cpf">Documento(CPF)</label><br><br>
                 <input type="text" name="documento_cpf" required placeholder="CPF"><br><br>
-                <label for="documento_rg">Documento(RG):</label><br><br>
+                <label for="documento_rg">Documento(RG)</label><br><br>
                 <input type="text" name="documento_rg" required placeholder="RG"><br><br>
-                <label for="data_nasc">Data de Nascimento:</label><br><br>
-                <input type="date" name="data_nasc" required placeholder="Data"><br><br>
-                <label for="telefone">telefone:</label><br><br>
-                <input type="tel" name="telefone" required placeholder="(xx) xxxxx-xxxx">
+                <div class="mid">
+                    <label for="data_nasc">Data de Nascimento</label>
+                    <label for="telefone" id="rigth">Telefone</label>
+                </div>
+                <div class="mid1">
+                    <input type="date" name="data_nasc" class="mid1" id="tam" placeholder="Data">
+                    <input type="tel" name="telefone" class="mid1" id="tam"  placeholder="(xx) xxxxx-xxxx">
+                </div>
+                
             
             </form>
         </div>
