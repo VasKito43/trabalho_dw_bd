@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/banco_de_dados'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/sql_python'
 db = SQLAlchemy(app)
 
 class Produto(db.Model):
