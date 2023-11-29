@@ -64,8 +64,9 @@ class Viagem (db.Model):
     data = db.Column(db.DateTime,  nullable=False)
     horario = db.Column(db.String(5), nullable=False)
     origem_codigo = db.Column(db.Integer, ForeignKey('cidade.C_codigo'), nullable=False)
-    destino = db.Column(db.Integer, ForeignKey('cidade.C_codigo'), nullable=False)
-    cidade = relationship("Cidade")
+    destino_codigo = db.Column(db.Integer, ForeignKey('cidade.C_codigo'), nullable=False)
+    cidade_origem = relationship("Cidade", foreign_keys=[origem_codigo])
+    cidade_destino = relationship("Cidade", foreign_keys=[destino_codigo])
     preco = db.Column(db.Integer, nullable=False)
 #    FOREIGN KEY (origem) REFERENCES cidade(ccodigo)
 #    FOREIGN KEY (destino) REFERENCES cidade(ccodigo)
@@ -98,7 +99,13 @@ class Bilhete (db.Model):
 def index():
     with app.app_context():
         todas_tabelas = Viagem.query.all()
-        return render_template('cadastro.html', tabelas = todas_tabelas)
+        return render_template('pagina_principal.html', tabelas = todas_tabelas)
+    
+@app.route('/templates/menu/cadastro.html', methods=['GET'])
+def carega_cadastro():    
+    with app.app_context():
+        return render_template('menu/cadastro.html')
+        
     
 
 @app.route('/produtos_json', methods=['GET'])
@@ -110,6 +117,20 @@ def get_produtos():
 
 
 
+@app.route('/cadastro', methods=['POST'])
+def add_produto():
+    with app.app_context():
+        if request.method == 'POST':
+            nome = request.form['nome']
+            sobrenome = request.form['sobrenome']
+            cpf = request.form['documento_cpf']
+            rg = request.form['documento_rg']
+            data_nasc = request.form['data_nasc']
+            telefone = request.form['telefone']
+            cliente = Cliente(P_nome=nome, U_nome=sobrenome, cpf=cpf, rg=rg, data_nasc=data_nasc, telefone=telefone)
+            db.session.add(cliente)
+            db.session.commit()
+            return redirect('/')
 
 
 
@@ -123,6 +144,7 @@ def get_produtos():
 
 
 
-
-with app.app_context():
-    db.create_all()
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        app.run(debug=True)
