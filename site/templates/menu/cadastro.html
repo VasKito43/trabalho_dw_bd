@@ -10,19 +10,19 @@
     <div class="container">
         <div class="box">
             <form action="/cadastro" id="form_cadastro" method="post">
-                <p id="ipessoal">Informações Pessoais</p>
+                <p id="ipessoal">Informações Pessoais</p><br>
 
                 <label for="nome">Nome</label><br><br>
-                <input type="text" name="nome" required placeholder="Nome"><br><br>
+                <input type="text" name="nome" class="border" required placeholder="Nome"><br><br>
 
                 <label for="sobrenome">Sobrenome</label><br><br>
-                <input type="text" name="sobrenome" required placeholder="Sobrenome"><br><br>
+                <input type="text" name="sobrenome" class="border" required placeholder="Sobrenome"><br><br>
 
                 <label for="documento_cpf">Documento(CPF)</label><br><br>
-                <input type="text" name="documento_cpf" required placeholder="CPF"><br><br>
+                <input type="text" name="documento_cpf" class="border" required placeholder="CPF"><br><br>
 
                 <label for="documento_rg">Documento(RG)</label><br><br>
-                <input type="text" name="documento_rg" required placeholder="RG"><br><br>
+                <input type="text" name="documento_rg" class="border" required placeholder="RG"><br><br>
 
                 <div class="mid">
                     <label for="data_nasc">Data de Nascimento</label>
@@ -33,15 +33,19 @@
                     <input type="date" name="data_nasc" class="mid1" id="tam" placeholder="Data">
                     <input type="tel" name="telefone" class="mid1" id="tam"  placeholder="(xx) xxxxx-xxxx">
                 </div>
-
-                <button type="submit" id="bt_cria_cadrastro">Criar Cadastro</button>
-
+                <div id="bt">
+                    <button type="submit" id="bt_cria_cadrastro">Criar Cadastro</button>
+                </div>
                 <p id="resultado"></p>
+                
             
             </form>
         </div>
-        
+        <div id="bus">
+            <img id="img1" src="../../static/IMAGEM/WhatsApp Image 2023-11-30 at 11.02.26.jpeg" alt="">
+        </div>
     </div>
+    
     
 </body>
 </html>

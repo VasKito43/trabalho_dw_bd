@@ -4,7 +4,7 @@
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-
+    
 }
 
 .container{
@@ -13,25 +13,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 10px;
-
+    border-radius: 7px;
+    background-color: rgb(231, 230, 230);
+    
 }
 .box{
     background-color: rgb(255, 255, 255);
-    box-shadow: 5px 5px 5px 5px black;
-    width: 40vw;
+    box-shadow: 5px 5px 5px 5px rgb(179, 178, 178);
+    width: 35vw;
     height: 90vh;
     border-radius: 7px;
-    
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }
 
+.border {
+    border: 2px solid #76add0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+    
+input{
+  outline: 0;
+}
 
 form{
-    padding-left: 10%;
+    padding-left: 0.1%;
+    border-radius: 7px;
 }
 
 #ipessoal{
-    background-color: rgb(207, 207, 207);
+    color: white;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #76add0;
+    height: 5vh;
+    margin-top: 5vh;
 }
 
 input {
@@ -59,3 +81,68 @@ input {
 #rigth {
     margin-right: 6vw;
 }
+
+#bt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 10vw;
+}
+button{
+    background:#76add0;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:5vh;
+    width: 20vw;
+    font-size:1.0em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    border-radius: 7px;
+  }
+  button:hover{
+    background:#fff;
+    color:#76add0;
+    border-radius: 7px;
+  }
+  button:before,button:after{
+    border-radius: 7px;
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #76add0;
+    transition:400ms ease all;
+  }
+  button:after{
+    border-radius: 7px;
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    border-radius: 7px;
+    width:100%;
+    transition:800ms ease all;
+  }
+
+  #bus {
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16vw;
+    
+  }
+
+  #img1{
+    width: 60vw;
+    height: 90vh;
+    border-radius: 10px;
+  }
