@@ -5,7 +5,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/rodoviaria'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vascogabriel43:PmDw8gknVr3b@ep-dry-scene-49620356.us-east-2.aws.neon.tech/rodoviaria?sslmode=require'
 db = SQLAlchemy(app)
 
 class Cidade(db.Model):
@@ -105,6 +105,16 @@ def index():
 def carega_cadastro():    
     with app.app_context():
         return render_template('menu/cadastro.html')
+    
+@app.route('/templates/menu/funcionario.html', methods=['GET'])
+def carrega_funcionario():
+    with app.app_context():
+        return render_template('menu/funcionario.html')
+    
+@app.route('/templates/menu/Funcionario/modifica-deleta_cadastro.html', methods=['GET'])
+def carrega_mod_dlt_cad():
+    with app.app_context():
+        return render_template('menu/Funcionario/modifica-deleta_cadastro.html')
         
     
 
@@ -130,7 +140,17 @@ def add_produto():
             cliente = Cliente(P_nome=nome, U_nome=sobrenome, cpf=cpf, rg=rg, data_nasc=data_nasc, telefone=telefone)
             db.session.add(cliente)
             db.session.commit()
-            return redirect('/')
+            return render_template('menu/cadastro.html')
+        
+@app.route('/pesquisar', methods=['POST'])
+def pesq_cliente():
+    with app.app_context():
+        if request.method == 'POST':
+            nome = request.form['nome']
+            sobrenome = request.form['sobrenome']
+            rg = request.form['rg']
+            
+
 
 
 

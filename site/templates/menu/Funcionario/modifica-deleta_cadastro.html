@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Editar Produto</h2>
+    <form method="post" action="/pesquisar">
+        <input type="text" name="nome" required placeholder="Nome do Cliente">
+
+        <input type="text" name="sobrenome" required placeholder="Sobrenome do Cliente">
+
+        <input type="text" name="rg" required placeholder="RG do Cliente"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        <ul>
+            {% for cliente in clientes %}
+                <li>
+                   Nome: {{cliente.P_nome}} {{cliente.U_nome}} - RG: {{cliente.rg}} Cpf: {{cliente.cpf}} - tel: {{cliente.telefone}}
+                </li>
+            {% endfor %}
+        </ul>
+
+    </form>
+</body>
+</html>
