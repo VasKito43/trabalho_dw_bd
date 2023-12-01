@@ -165,7 +165,6 @@ def edit_cliente(rg):
             cliente.P_nome = request.form['nome']
             cliente.U_nome = request.form['sobrenome']
             cliente.cpf = request.form['documento_cpf']
-            cliente.data_nasc = request.form['data_nasc']
             cliente.telefone = request.form['telefone']
             db.session.commit()
             return redirect('/')
@@ -173,6 +172,13 @@ def edit_cliente(rg):
 
 
 
+@app.route('/menu/Funcionario/delete_cliente/<string:rg>')
+def delete_cliente(rg):
+    with app.app_context():
+        cliente = Cliente.query.get(rg)
+        db.session.delete(cliente)
+        db.session.commit()
+        return redirect('/')
 
 
 

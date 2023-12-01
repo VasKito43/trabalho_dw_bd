@@ -22,6 +22,8 @@
                 {% for cliente in clientes_pesquisa %}
                     <li>{{ cliente.P_nome }} {{ cliente.U_nome }} - RG: {{ cliente.rg }} - CPF: {{ cliente.cpf }}
                         <a href="{{ url_for('edit_cliente', rg=cliente.rg) }}">Editar</a>
+                        <a href="{{ url_for('delete_cliente', rg=cliente.rg) }}">Deletar</a>
+
                     </li>
                 {% endfor %}
             </ul>
