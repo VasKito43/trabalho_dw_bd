@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+import requests
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vascogabriel43:PmDw8gknVr3b@ep-dry-scene-49620356.us-east-2.aws.neon.tech/rodoviaria?sslmode=require'
@@ -94,12 +96,19 @@ class Bilhete (db.Model):
 # FOREIGN key (rg_cliente) REFERENCES cliente(rg)
 # FOREIGN KEY (cviagem) REFERENCES viagem(cviagem)
 
-
 @app.route('/')
 def index():
     with app.app_context():
         todas_tabelas = Viagem.query.all()
         return render_template('pagina_principal.html', tabelas = todas_tabelas)
+    
+@app.route('/clientes_json', methods=['GET'])
+def get_clientes():
+    global lista_clientes
+    with app.app_context():
+        clientes = Cliente.query.all()
+        clientes_list = [{"pnome": cliente.P_nome, "unome": cliente.U_nome, "rg": cliente.rg, "cpf": cliente.cpf, "data_nasc": cliente.data_nasc, "telefone": cliente.telefone} for cliente in clientes]
+        return jsonify(clientes_list)
     
 @app.route('/templates/menu/cadastro.html', methods=['GET'])
 def carega_cadastro():    
@@ -116,15 +125,6 @@ def carrega_mod_dlt_cad():
     with app.app_context():
         return render_template('menu/Funcionario/modifica-deleta_cadastro.html')
         
-    
-
-@app.route('/produtos_json', methods=['GET'])
-def get_produtos():
-    with app.app_context():
-        clientes = Cliente.query.all()
-        clientes_list = [{"pnome": cliente.P_nome, "unome": cliente.U_nome, "rg": cliente.rg, "cpf": cliente.cpf, "data_nasc": cliente.data_nasc, "telefone": cliente.telefone} for cliente in clientes]
-        return jsonify(clientes_list)
-
 
 
 @app.route('/cadastro', methods=['POST'])
@@ -142,18 +142,34 @@ def add_produto():
             db.session.commit()
             return render_template('menu/cadastro.html')
         
-@app.route('/pesquisar', methods=['POST'])
+
+@app.route('/modifica-deleta_cadastro', methods=['POST', 'GET'])
 def pesq_cliente():
     with app.app_context():
+
+        clientes_pesquisa = None
+
         if request.method == 'POST':
             nome = request.form['nome']
             sobrenome = request.form['sobrenome']
             rg = request.form['rg']
-            
+            clientes_pesquisa = Cliente.query.filter_by(P_nome=nome, U_nome=sobrenome, rg=rg).all()
 
-
-
-
+        return render_template('menu/Funcionario/modifica-deleta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
+    
+@app.route('/menu/Funcionario/edit_cliente/<string:rg>', methods=['GET', 'POST'])
+def edit_cliente(rg):
+    with app.app_context():
+        cliente = Cliente.query.get(rg)
+        if request.method == 'POST':
+            cliente.P_nome = request.form['nome']
+            cliente.U_nome = request.form['sobrenome']
+            cliente.cpf = request.form['documento_cpf']
+            cliente.data_nasc = request.form['data_nasc']
+            cliente.telefone = request.form['telefone']
+            db.session.commit()
+            return redirect('/')
+        return render_template('menu/Funcionario/edit_cliente.html', cliente=cliente)
 
 
 

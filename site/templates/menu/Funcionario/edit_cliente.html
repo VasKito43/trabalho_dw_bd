@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form  method="post">
+
+        <label for="nome">Nome</label><br><br>
+        <input type="text" name="nome" required value="{{ cliente.P_nome}}"><br><br>
+
+        <label for="sobrenome">Sobrenome</label><br><br>
+        <input type="text" name="sobrenome"  required value="{{ cliente.U_nome}}"><br><br>
+
+        <label for="documento_cpf">Documento(CPF)</label><br><br>
+        <input type="text" name="documento_cpf"  required value="{{ cliente.cpf}}"><br><br>
+
+        <div class="mid">
+            <label for="data_nasc">Data de Nascimento</label>
+            <label for="telefone">Telefone</label>
+        </div>
+
+        <div class="mid1">
+            <input type="date" name="data_nasc" value="{{ cliente.data_nasc}}">
+            <input type="tel" name="telefone" value="{{ cliente.telefone}}">
+        </div>
+        <div id="bt">
+            <button type="submit" >Editar Cadastro</button>
+        </div>
+        
+    
+    </form>
+</body>
+</html>
