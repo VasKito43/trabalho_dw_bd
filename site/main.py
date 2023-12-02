@@ -124,7 +124,75 @@ def carrega_funcionario():
 def carrega_mod_dlt_cad():
     with app.app_context():
         return render_template('menu/Funcionario/modifica-deleta_cadastro.html')
-        
+    
+@app.route('/templates/menu/Funcionario/consultar.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultar.html')
+    
+
+#consultas
+    
+@app.route('/templates/menu/Funcionario/consultas/cidades_cadastradas.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/cidades_cadastradas.html')
+    
+@app.route('/templates/menu/Funcionario/consultas/consulta_cadastro.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consulta_cadastro.html')
+
+@app.route('/templates/menu/Funcionario/consultas/consultar_funcionario.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consultar_funcionario.html')
+
+@app.route('/templates/menu/Funcionario/consultas/consultar_viagem.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consultar_viagem.html')
+
+@app.route('/templates/menu/Funcionario/consultas/empresa_e_sede.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/empresa_e_sede.html')
+
+@app.route('/templates/menu/Funcionario/consultas/funcionario_e_sua_cidade.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/funcionario_e_sua_cidade.html')
+    
+@app.route('/templates/menu/Funcionario/consultas/motorista_viagem_onibus.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/motorista_viagem_onibus.html')
+    
+@app.route('/templates/menu/Funcionario/consultas/onibus_e_empresa.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/onibus_e_empresa.html')
+
+@app.route('/templates/menu/Funcionario/consultas/passageiros_da_viagem.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html')
+    
+@app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html')
+
+@app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html')
+
+@app.route('/templates/menu/Funcionario/consultas/todos_os_clientes_por_ano.html', methods=['GET'])
+def carrega_consultar():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_clientes_por_ano.html')
+
 
 
 @app.route('/cadastro', methods=['POST'])
