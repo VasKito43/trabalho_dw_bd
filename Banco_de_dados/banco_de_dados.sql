@@ -12,21 +12,24 @@ CREATE table cidade(
   nome varchar(50) NOT NULL,
   estado varchar(20) NOT NULL,
   ccodigo int NOT NULL PRIMARY KEY
-)
+);
+
 CREATE TABLE empresa(
   cnpj varchar(30) NOT NULL PRIMARY KEY,
   nome varchar(50),
   cidade int NOT NULL,
   FOREIGN KEY (cidade) REFERENCES cidade(ccodigo)
-)
+);
+
 CREATE table cliente(
   pnome varchar(50) not NULL,
   unome varchar(50) NOT NULL,
   rg varchar(20) NOT NULL PRIMARY KEY,
   cpf varchar(20) NOT NULL,
-  data_nasc date,
+  datanasc date,
   telefone varchar(20) NOT NULL
-)
+);
+
 CREATE table funcionario(
   fcodigo varchar(10) PRIMARY KEY,
   senha varchar(10),
@@ -48,7 +51,8 @@ CREATE TABLE onibus(
   ano int not NULL,
   classe varchar(15),
   FOREIGN KEY (empresa) REFERENCES empresa(cnpj)
-)
+);
+
 CREATE TABLE viagem(
   cviagem int NOT NULL PRIMARY key,
   nonibus int NOT NULL,
@@ -73,12 +77,12 @@ CREATE TABLE motorista(
 );
 CREATE TABLE bilhete(
   nbilhete int NOT NULL PRIMARY KEY,
-  rg_cliente varchar(20) NOT NULL,
-  data_venda date,
+  rgcliente varchar(20) NOT NULL,
+  datavenda date,
   cviagem int NOT NULL,
   vendedor varchar(10) NOT NULL,
   FOREIGN key (vendedor) REFERENCES funcionario(fcodigo),
-  FOREIGN key (rg_cliente) REFERENCES cliente(rg),
+  FOREIGN key (rgcliente) REFERENCES cliente(rg),
   FOREIGN KEY (cviagem) REFERENCES viagem(cviagem)
 );
 
@@ -87,15 +91,44 @@ INSERT INTO cidade VALUES
   ('Maringa', 'Paraná', 15),
   ('Londrina', 'Paraná', 1),
   ('Curitiba', 'Paraná', 99),
+  ('Foz do Iguaçu', 'Paraná', 569),
   ('São Paulo', 'São Paulo', 324),
   ('Campinas', 'São Paulo', 323),
   ('Ribeirão Preto', 'São Paulo', 314),
   ('Balneário Camburiú', 'Santa Catarina', 575),
-  ('Florianóplois', 'Santa Catarina', 75);
+  ('Florianóplois', 'Santa Catarina', 75),
+  ('Rio de Janeiro', 'Rio de Janeiro', 2),
+  ('Belo Horizonte', 'Minas Gerais', 3),
+  ('Brasília', 'Distrito Federal', 43),
+  ('Salvador', 'Bahia', 56),
+  ('Rio Branco', 'Acre', 102),
+  ('Maceió', 'Alagoas', 60),
+  ('Macapá', 'Amapá', 38),
+  ('Manaus', 'Amazonas', 4),
+  ('Fortaleza', 'Ceará', 6),
+  ('Vitória', 'Espírito Santo', 8),
+  ('Goiânia', 'Goiás', 9),
+  ('São Luís', 'Maranhão', 10),
+  ('Cuiabá', 'Mato Grosso', 11),
+  ('Campo Grande', 'Mato Grosso do Sul', 12),
+  ('Belém', 'Pará', 14),
+  ('João Pessoa', 'Paraíba', 151),
+  ('Recife', 'Pernambuco', 17),
+  ('Teresina', 'Piauí', 18),
+  ('Rio de Janeiro', 'Rio de Janeiro', 19),
+  ('Natal', 'Rio Grande do Norte', 20),
+  ('Porto Alegre', 'Rio Grande do Sul', 21),
+  ('Porto Velho', 'Rondônia', 22),
+  ('Boa Vista', 'Roraima', 23),
+  ('Aracaju', 'Sergipe', 26),
+  ('Palmas', 'Tocantins', 27);
+
+
   
 INSERT into empresa VALUES
   ('111222333444', 'Brasil Sul', 1),
-  ('111333444555', 'Garcia', 1);
+  ('111333444555', 'Garcia', 1),
+  ('111444555666','Schimitxhi',1);
 
 INSERT into cliente VALUES
   ('joão', 'Ferreira', '111111', '12345678999', '2000-03-23', '998754278'),
@@ -129,7 +162,8 @@ INSERT inTO funcionario VALUES
   ('func007', 'senha007', 'Lucas', 'Fernandes', '127777', '99999999900', '111333444555', 75),
   ('func008', 'senha008', 'Isabela', 'Lima', '123888', '11122233300', '111333444555', 314),
   ('func009', 'senha009', 'Thiago', 'Martins', '991099', '44455566600', '111333444555', 99),
-  ('func010', 'senha010', 'Aline', 'Sousa', '101011', '77788899911',  '111333444555', 15);
+  ('func010', 'senha010', 'Aline', 'Sousa', '101011', '77788899911',  '111333444555', 15),
+  ('func011', 'senha011', 'Gabriel', 'Vasco', '432156', '22233344455', '111444555666', 113);
 
 INSERT inTO onibus VALUES
   (86226, 1234, '111333444555', 'G7', 2020, 'Leito'),
@@ -151,7 +185,8 @@ Insert into viagem VALUES
   (5, 88009, '2023-11-05', '16:45', 1, 324, 65),
   (6, 86226, '2023-11-06', '18:30', 1, 323, 75),
   (7, 3420, '2023-11-07', '20:00', 15, 75, 70),
-  (8, 3220, '2023-11-08', '22:15', 15, 1, 55);
+  (8, 3220, '2023-11-08', '22:15', 15, 1, 55),
+  (9, 89068, '2023-11-09', '23:30', 3, 569, 10);
 
 INSERT into motorista VALUES
   ('José', 'Silva', '118811', '12345678900', 1, 1),
@@ -161,7 +196,9 @@ INSERT into motorista VALUES
   ('Ricardo', 'Gomes', '553655', '77777777700', 5, 5),
   ('Camila', 'Rodrigues', '666666', '88888888800', 6, 6),
   ('Lucas', 'Fernandes', '775677', '99999999900', 7, 7),
-  ('Isabela', 'Lima', '878888', '11122233300', 8, 8);
+  ('Isabela', 'Lima', '878888', '11122233300', 8, 8),
+  ('Luis', 'Marcelo', '873786', '98765432101', 9, 9);
+
 
 INSERT into bilhete VALUES
   (1, '111111', '2023-11-01', 1, 'func001'),
@@ -173,4 +210,6 @@ INSERT into bilhete VALUES
   (7, '333333', '2023-11-07', 7, 'func007'),
   (8, '999999', '2023-11-08', 8, 'func008'),
   (9, '131313', '2023-11-09', 1, 'func009'),
-  (10, '222222', '2023-11-10', 2, 'func010');
+  (10, '222222', '2023-11-10', 2, 'func010'),
+  (11, '212121', '2023-11-11', 9, 'func011')
+  
