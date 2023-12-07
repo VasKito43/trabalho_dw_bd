@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Pesquisar Cadastro de cidade</h2>
+    <form method="post" action="/cidades_cadastradas">
+        <input type="text" name="nome"  placeholder="Nome da cidade">
+
+        <input type="number" name="ccodigo"  placeholder="codigo da cidade"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if cidades_pesquisa %}
+        <h2>Cidades Encontrados:</h2>
+            <ul>
+                {% for cidade in cidades_pesquisa %}
+                    <li>{{ cidade.nome }} ; {{ cidade.estado }}          -          codigo: {{ cidade.ccodigo }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </form>
+</body>
+</html>

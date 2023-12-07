@@ -6,6 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h2>Pesquisar Cadastro</h2>
+    <form method="post" action="/modifica-deleta_cadastro">
+        <input type="text" name="nome" placeholder="Nome do Cliente">
+
+        <input type="text" name="sobrenome" placeholder="Sobrenome do Cliente">
+
+        <input type="text" name="rg" placeholder="RG do Cliente"><br>
+
+        <input type="text" name="cpf" placeholder="CPF do Cliente"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if clientes_pesquisa %}
+        <h2>Clientes Encontrados:</h2>
+            <ul>
+                {% for cliente in clientes_pesquisa %}
+                    <li>{{ cliente.pnome }} {{ cliente.unome }} - RG: {{ cliente.rg }} - CPF: {{ cliente.cpf }} - telefone: {{ cliente.telefone }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 </body>
 </html>

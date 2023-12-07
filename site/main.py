@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, or_, and_
 from sqlalchemy.orm import relationship
 import requests
 
@@ -102,14 +102,6 @@ def index():
         todas_tabelas = Viagem.query.all()
         return render_template('pagina_principal.html', tabelas = todas_tabelas)
     
-@app.route('/clientes_json', methods=['GET'])
-def get_clientes():
-    global lista_clientes
-    with app.app_context():
-        clientes = Cliente.query.all()
-        clientes_list = [{"pnome": cliente.pnome, "unome": cliente.unome, "rg": cliente.rg, "cpf": cliente.cpf, "data_nasc": cliente.datanasc, "telefone": cliente.telefone} for cliente in clientes]
-        return jsonify(clientes_list)
-    
 @app.route('/templates/menu/cadastro.html', methods=['GET'])
 def carega_cadastro():    
     with app.app_context():
@@ -133,15 +125,67 @@ def carrega_consultar():
 
 #consultas
     
-# @app.route('/templates/menu/Funcionario/consultas/cidades_cadastradas.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/cidades_cadastradas.html')
+@app.route('/templates/menu/Funcionario/consultas/cidades_cadastradas.html', methods=['GET'])
+def carrega_consulta_cidades_cadastradas():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/cidades_cadastradas.html')
     
-# @app.route('/templates/menu/Funcionario/consultas/consulta_cadastro.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/consulta_cadastro.html')
+@app.route('/cidades_cadastradas', methods=['POST', 'GET'])
+def consulta_cidades_cadastradas():
+    with app.app_context():
+
+        cidades_pesquisa = None
+
+        if request.method == 'POST':
+            nome = request.form['nome']
+            ccodigo = request.form['ccodigo']
+            if nome == '' and ccodigo == '':
+                cidades_pesquisa = Cidade.query.all()
+            else:
+                if ccodigo != '':
+                    cidades_pesquisa = Cidade.query.filter(
+                        and_(
+                            Cidade.nome.like(f'%{nome}%'),
+                            Cidade.ccodigo == ccodigo)).all()
+                else:
+                    cidades_pesquisa = Cidade.query.filter(
+                        Cidade.nome.like(f'%{nome}%')).all()
+
+
+        return render_template('menu/Funcionario/consultas/cidades_cadastradas.html', cidades_pesquisa=cidades_pesquisa)
+    
+@app.route('/templates/menu/Funcionario/consultas/consulta_cadastro.html', methods=['GET'])
+def carrega_consulta_cadastro():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consulta_cadastro.html')
+    
+@app.route('/modifica-deleta_cadastro', methods=['POST', 'GET'])
+def consulta_cadastro():
+    with app.app_context():
+
+        clientes_pesquisa = None
+
+        if request.method == 'POST':
+            nome = request.form['nome']
+            sobrenome = request.form['sobrenome']
+            rg = request.form['rg']
+            cpf = request.form['cpf']
+            if nome == '' and sobrenome == '' and rg == '' and cpf == '':
+                clientes_pesquisa = Cliente.query.all()
+            # elif sobrenome == '' and rg == '' and cpf == '':
+            #     clientes_pesquisa = Cliente.query.filter_by(pnome=nome).all()
+            # elif nome == '' and rg == '' and cpf == '':
+            #     clientes_pesquisa = Cliente.query.filter_by(unome=sobrenome).all()
+            # elif  and rg == '' and cpf == ''
+            else:
+                clientes_pesquisa = Cliente.query.filter(and_(Cliente.pnome.like(f'%{nome}%'), 
+                                    Cliente.unome.like(f'%{sobrenome}%'), 
+                                    Cliente.rg.like(f'%{rg}%'),
+                                    Cliente.cpf.like(f'%{cpf}%'))).all()
+
+        return render_template('menu/Funcionario/consultas/consulta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
+    
+
 
 # @app.route('/templates/menu/Funcionario/consultas/consultar_funcionario.html', methods=['GET'])
 # def carrega_consultar():
