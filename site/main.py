@@ -239,11 +239,27 @@ def consulta_viagem():
 #     with app.app_context():
 #         return render_template('menu/Funcionario/consultas/empresa_e_sede.html')
 
-# @app.route('/templates/menu/Funcionario/consultas/funcionario_e_sua_cidade.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/funcionario_e_sua_cidade.html')
+@app.route('/templates/menu/Funcionario/consultas/funcionario_e_sua_cidade.html', methods=['GET'])
+def carrega_consultar_funcionario_e_sua_cidade():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/funcionario_e_sua_cidade.html')
     
+@app.route('/consulta_funcionario_e_sede', methods=['POST', 'GET'])
+def consulta_viagem():
+    with app.app_context():
+        funcionario_pesquisa = None
+
+        if request.method == 'POST':
+            
+            fcodigo = request.form['fcodigo']
+            if fcodigo != '':
+                funcionario = Funcionario.query.filter(and_(Funcionario.nome.like(f'%{fcodigo}%')))
+                for i in funcionario:
+                    fcodigo = i.fcodigo
+                    cidade_codigo = i.cidade_codigo
+                
+                cidade = Cidade.query.filter(and_(Cidade.ccodigo == cidade_codigo)).all()
+        return render_template('menu/Funcionario/consultas/consulta_viagem.html', cidade=cidade, fcodigo=fcodigo)
 # @app.route('/templates/menu/Funcionario/consultas/motorista_viagem_onibus.html', methods=['GET'])
 # def carrega_consultar():
 #     with app.app_context():
