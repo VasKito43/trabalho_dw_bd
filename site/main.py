@@ -238,10 +238,29 @@ def consulta_viagem():
 
 #consulta empresa e sede
 
-# @app.route('/templates/menu/Funcionario/consultas/empresa_e_sede.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/empresa_e_sede.html')
+@app.route('/templates/menu/Funcionario/consultas/empresas_e_sede.html', methods=['GET'])
+def carrega_consultar_empresa_e_sede():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/empresas_e_sede.html')
+    
+@app.route('/consulta_empresa_e_sede', methods=['POST', 'GET'])
+def consulta_empresa_e_sede():
+    with app.app_context():
+        if request.method == 'POST':
+            cnpj = request.form['empresa']
+            if cnpj != '':
+                empresa = Empresa.query.filter(and_(Empresa.cnpj.like(f'{cnpj}'))).all()
+                for i in empresa:
+                    sede = i.cidade_codigo
+                    nome_empresa = i.nome
+
+                cidade = Cidade.query.filter(and_(Cidade.ccodigo == sede)).all()
+                for i in cidade:
+                    nome_cidade = i.nome
+
+                return render_template('menu/Funcionario/consultas/empresas_e_sede.html', nome_empresa=nome_empresa, nome_cidade=nome_cidade)
+
+        
 
 #consulta funcionario e sua cidade
 
@@ -276,7 +295,6 @@ def carrega_consultar_motorista_viagem_onibus():
 @app.route('/consulta_motorista_onibus_viagem', methods=['POST', 'GET'])
 def consulta_motorista_onibus_viagem():
     with app.app_context():
-        funcionario_pesquisa = None
 
         if request.method == 'POST':
             
@@ -293,20 +311,57 @@ def consulta_motorista_onibus_viagem():
         return render_template('menu/Funcionario/consultas/motorista_viagem_onibus.html', pnome=pnome, unome=unome, nonibus=nonibus, cviagem=cviagem)
 
 #consulta onibus e empresa 
+
+@app.route('/templates/menu/Funcionario/consultas/onibus_e_empresa.html', methods=['GET'])
+def carrega_consultar_onibus_e_empresa():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/onibus_e_empresa.html')
     
-# @app.route('/templates/menu/Funcionario/consultas/onibus_e_empresa.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/onibus_e_empresa.html')
+@app.route('/consulta_empresa_onibus', methods=['POST', 'GET'])
+def consulta_empresa_onibus():
+     with app.app_context():
+          if request.method == 'POST':
+              nonibus = request.form['nonibus']
+              if nonibus != '':
+                onibus = Onibus.query.filter(and_(Onibus.nonibus == nonibus))
+                for i in onibus:
+                    nonibus = i.nonibus
+                    placa = i.placa
+                    empresa_cnpj = i.empresa_cnpj
+                    classe = i.classe
+                empresa = Empresa.query.filter(and_(Empresa.cnpj.like(f'%{empresa_cnpj}%')))
+                for i in empresa:
+                    nome = i.nome               
+                return render_template('menu/Funcionario/consultas/onibus_e_empresa.html', nonibus=nonibus, placa=placa, classe=classe,  nome=nome)
+               
+
+         
+
 
 #consulta passageiros da viagem
 
-# @app.route('/templates/menu/Funcionario/consultas/passageiros_da_viagem.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html')
+@app.route('/templates/menu/Funcionario/consultas/passageiros_da_viagem.html', methods=['GET'])
+def carrega_consultar_passageiros_da_viagem():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html')
     
-#consulta todos os bilhetes de um funcionario
+@app.route('/consulta_passageiros_viagem', methods=['POST', 'GET'])
+def passageiros_viagem():
+     with app.app_context():
+          cliente_list = []
+          if request.method == 'POST':
+              cviagem = request.form['cviagem']
+              if cviagem != '':
+                bilhete = Bilhete.query.filter(and_(Bilhete.cviagem == cviagem ))
+                for i in bilhete:
+                    rgcliente = i.rgcliente    
+                    cliente = Cliente.query.filter(and_(Cliente.rg.like(f'{rgcliente}')))
+                    cliente_list.append(cliente)
+                return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html', cliente_list=cliente_list )
+    
+
+
+# consulta todos os bilhetes de um funcionario
 
 @app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html', methods=['GET'])
 def carrega_bilhete_cliente():

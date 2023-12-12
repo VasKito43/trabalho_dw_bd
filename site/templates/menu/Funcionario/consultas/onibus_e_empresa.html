@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Consulta Onibus e empresa</h2>
+
+    <form action="/consulta_empresa_onibus" method="post">
+        <input type="number" name="nonibus" placeholder="Numero do onibus"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if nonibus %}
+        <h2>Onibus Encontrados:</h2>
+            <ul>
+                <!-- esta aqui -->
+                    <li> Numero do onibus: {{nonibus}}  Classe: {{classe}} Placa: {{placa}} Empresa: {{nome}}</li>
+            </ul>
+        {% endif %}
+    </form>
+    
+</body>
+</html>
