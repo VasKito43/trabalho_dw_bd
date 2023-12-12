@@ -413,9 +413,10 @@ def add_cliente():
             nome = request.form['nome']
             sobrenome = request.form['sobrenome']
             rg = request.form['documento_rg']
+            cpf = request.form['documento_cpf']
             datanasc = request.form['data_nasc']
             telefone = request.form['telefone']
-            cliente = Cliente(pnome=nome, unome=sobrenome, rg=rg, datanasc=datanasc, telefone=telefone)
+            cliente = Cliente(pnome=nome, unome=sobrenome, rg=rg, datanasc=datanasc, telefone=telefone, cpf=cpf)
             db.session.add(cliente)
             db.session.commit()
             return render_template('menu/cadastro.html')
