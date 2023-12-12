@@ -143,10 +143,8 @@ def consulta_cidades_cadastradas():
                 cidades_pesquisa = Cidade.query.all()
             else:
                 if ccodigo != '':
-                    cidades_pesquisa = Cidade.query.filter(
-                        and_(
-                            Cidade.nome.like(f'%{nome}%'),
-                            Cidade.ccodigo == ccodigo)).all()
+                    cidades_pesquisa = Cidade.query.filter(and_(Cidade.nome.like(f'%{nome}%'),
+                                                                Cidade.ccodigo == ccodigo)).all()
                 else:
                     cidades_pesquisa = Cidade.query.filter(
                         Cidade.nome.like(f'%{nome}%')).all()
@@ -154,12 +152,14 @@ def consulta_cidades_cadastradas():
 
         return render_template('menu/Funcionario/consultas/cidades_cadastradas.html', cidades_pesquisa=cidades_pesquisa)
     
+
+
 @app.route('/templates/menu/Funcionario/consultas/consulta_cadastro.html', methods=['GET'])
 def carrega_consulta_cadastro():
     with app.app_context():
         return render_template('menu/Funcionario/consultas/consulta_cadastro.html')
     
-@app.route('/modifica-deleta_cadastro', methods=['POST', 'GET'])
+@app.route('/consulta_cadastro', methods=['POST', 'GET'])
 def consulta_cadastro():
     with app.app_context():
 
@@ -172,30 +172,61 @@ def consulta_cadastro():
             cpf = request.form['cpf']
             if nome == '' and sobrenome == '' and rg == '' and cpf == '':
                 clientes_pesquisa = Cliente.query.all()
-            # elif sobrenome == '' and rg == '' and cpf == '':
-            #     clientes_pesquisa = Cliente.query.filter_by(pnome=nome).all()
-            # elif nome == '' and rg == '' and cpf == '':
-            #     clientes_pesquisa = Cliente.query.filter_by(unome=sobrenome).all()
-            # elif  and rg == '' and cpf == ''
             else:
                 clientes_pesquisa = Cliente.query.filter(and_(Cliente.pnome.like(f'%{nome}%'), 
-                                    Cliente.unome.like(f'%{sobrenome}%'), 
-                                    Cliente.rg.like(f'%{rg}%'),
-                                    Cliente.cpf.like(f'%{cpf}%'))).all()
-
+                                                              Cliente.unome.like(f'%{sobrenome}%'), 
+                                                              Cliente.rg.like(f'%{rg}%'),
+                                                              Cliente.cpf.like(f'%{cpf}%'))).all()
+                          
         return render_template('menu/Funcionario/consultas/consulta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
     
 
 
-# @app.route('/templates/menu/Funcionario/consultas/consultar_funcionario.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/consultar_funcionario.html')
+@app.route('/templates/menu/Funcionario/consultas/consulta_funcionario.html', methods=['GET'])
+def carrega_consulta_funcionario():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consulta_funcionario.html')
+    
+@app.route('/consulta_funcionario', methods=['POST', 'GET'])
+def consulta_funcionario():
+    with app.app_context():
+        funcionario_pesquisa = None
 
-# @app.route('/templates/menu/Funcionario/consultas/consultar_viagem.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/consultar_viagem.html')
+        if request.method == 'POST':
+            nome = request.form['nome']
+            sobrenome = request.form['sobrenome']
+            fcodigo = request.form['fcodigo']
+            if nome == '' and sobrenome == '' and fcodigo == '':
+                funcionario_pesquisa = Funcionario.query.all()
+            else:
+                funcionario_pesquisa = Funcionario.query.filter(and_(Funcionario.pnome.like(f'%{nome}%'), 
+                                                              Funcionario.unome.like(f'%{sobrenome}%'), 
+                                                              Funcionario.fcodigo.like(f'%{fcodigo}%'))).all()
+        return render_template('menu/Funcionario/consultas/consulta_funcionario.html', funcionario_pesquisa=funcionario_pesquisa)
+
+@app.route('/templates/menu/Funcionario/consultas/consulta_viagem.html', methods=['GET'])
+def carrega_consultar_viagem():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/consulta_viagem.html')
+    
+@app.route('/consulta_viagem', methods=['POST', 'GET'])
+def consulta_viagem():
+    with app.app_context():
+        viagem_pesquisa = None
+
+        if request.method == 'POST':
+            origem = request.form['origem']
+            destino = request.form['destino']
+            cviagem = request.form['cviagem']
+            if origem == '' and destino == '' and cviagem == '':
+                viagem_pesquisa = Viagem.query.all()
+            else:
+                    cidade_origem = Cidade.query.filter(and_(Cidade.nome.like(f'%{origem}%')))
+                    cidade_destino = Cidade.query.filter(and_(Cidade.nome.like(f'%{destino}%')))
+                    viagem_pesquisa = Viagem.query.filter(and_(Viagem.origem == cidade_origem.ccodigo,
+                                                               Viagem.destino == cidade_destino.ccodigo,
+                                                               Viagem.cviagem == cviagem)).all()
+        return render_template('menu/Funcionario/consultas/consulta_viagem.html', viagem_pesquisa=viagem_pesquisa)
 
 # @app.route('/templates/menu/Funcionario/consultas/empresa_e_sede.html', methods=['GET'])
 # def carrega_consultar():
@@ -245,11 +276,10 @@ def add_cliente():
         if request.method == 'POST':
             nome = request.form['nome']
             sobrenome = request.form['sobrenome']
-            cpf = request.form['documento_cpf']
             rg = request.form['documento_rg']
             datanasc = request.form['data_nasc']
             telefone = request.form['telefone']
-            cliente = Cliente(pnome=nome, unome=sobrenome, cpf=cpf, rg=rg, datanasc=datanasc, telefone=telefone)
+            cliente = Cliente(pnome=nome, unome=sobrenome, rg=rg, datanasc=datanasc, telefone=telefone)
             db.session.add(cliente)
             db.session.commit()
             return render_template('menu/cadastro.html')

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Pesquisar Cadastro</h2>
+    <form method="post" action="/consulta_viagem">
+        <input type="text" name="origem" placeholder="Origem">
+
+        <input type="text" name="destino" placeholder="Destino">
+
+        <input type="number" name="cviagem" placeholder="Codigo da Viagem"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if viagem_pesquisa %}
+        <h2>Viagem Encontrados:</h2>
+            <ul>
+                {% for viagem in viagem_pesquisa %}
+                    <li>{{ viagem.origem}} {{ viagem.destino }} - {{ viagem.data }} - Horario: {{ viagem.horario }} Codigo: {{ viagem.cviagem }} - Onibus: {{ viagem.nonibus }} - Preço {{viagem.preco}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+</body>
+</html>
