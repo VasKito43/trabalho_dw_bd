@@ -345,6 +345,7 @@ def carrega_consultar_passageiros_da_viagem():
     with app.app_context():
         return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html')
     
+    
 @app.route('/consulta_passageiros_viagem', methods=['POST', 'GET'])
 def passageiros_viagem():
      with app.app_context():
@@ -399,10 +400,22 @@ def pesq_bilhete():
 
 #consulta todos os clientes que viajaram por ano
 
-# @app.route('/templates/menu/Funcionario/consultas/todos_os_clientes_por_ano.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/todos_os_clientes_por_ano.html')
+@app.route('/templates/menu/Funcionario/consultas/todos_os_clientes_por_data.html', methods=['GET'])
+def carrega_consultar_todos_os_clientes_por_data():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_clientes_por_data.html')
+    
+@app.route('/consulta_todos_os_clientes_por_data', methods=['POST', 'GET'])
+def consulta_todos_os_clientes_por_data():
+     with app.app_context():
+          if request.method == 'POST':
+              ano = request.form['ano']
+              if ano != '':
+                bilhete = Bilhete.query.filter(and_(Bilhete.datavenda == ano))
+              
+                return render_template('menu/Funcionario/consultas/todos_os_clientes_por_data.html', bilhete=bilhete)
+    
+
 
 
 
