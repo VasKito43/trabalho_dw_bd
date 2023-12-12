@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Todos os Bilhetes:</h2>
+    <form method="post" action="/todos_os_bilhetes_do_cliente">
+
+        <input type="text" name="cliente"  placeholder="RG do Cliente">
+
+
+        <button type="submit">Pesquisar</button>
+        {% if bilhete_pesquisa %}
+        <h2>Codigo do Bilhete:</h2>
+            <ul>
+                {% for bilhete in bilhete_pesquisa %}
+                    <li>{{bilhete.nbbilhete}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </form>
+</body>
+</html>

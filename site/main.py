@@ -245,7 +245,7 @@ def carrega_consultar_funcionario_e_sua_cidade():
         return render_template('menu/Funcionario/consultas/funcionario_e_sua_cidade.html')
     
 @app.route('/consulta_funcionario_e_sede', methods=['POST', 'GET'])
-def consulta_viagem():
+def consulta_funcionario_e_sede():
     with app.app_context():
         funcionario_pesquisa = None
 
@@ -253,13 +253,13 @@ def consulta_viagem():
             
             fcodigo = request.form['fcodigo']
             if fcodigo != '':
-                funcionario = Funcionario.query.filter(and_(Funcionario.nome.like(f'%{fcodigo}%')))
+                funcionario = Funcionario.query.filter(and_(Funcionario.fcodigo.like(f'%{fcodigo}%')))
                 for i in funcionario:
                     fcodigo = i.fcodigo
                     cidade_codigo = i.cidade_codigo
                 
                 cidade = Cidade.query.filter(and_(Cidade.ccodigo == cidade_codigo)).all()
-        return render_template('menu/Funcionario/consultas/consulta_viagem.html', cidade=cidade, fcodigo=fcodigo)
+        return render_template('menu/Funcionario/consultas/funcionario_e_sua_cidade.html', cidade=cidade, fcodigo=fcodigo)
 # @app.route('/templates/menu/Funcionario/consultas/motorista_viagem_onibus.html', methods=['GET'])
 # def carrega_consultar():
 #     with app.app_context():
@@ -275,15 +275,38 @@ def consulta_viagem():
 #     with app.app_context():
 #         return render_template('menu/Funcionario/consultas/passageiros_da_viagem.html')
     
-# @app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html')
+def carrega_bilhete_cliente():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html')
 
-# @app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html', methods=['GET'])
-# def carrega_consultar():
-#     with app.app_context():
-#         return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html')
+@app.route('/todos_os_bilhetes_do_cliente', methods=['POST', 'GET'])
+def pesq_bilhete_cliente():
+    with app.app_context():
+        if request.method == 'POST':
+            rg = request.form['cliente']
+            if rg == '':
+                bilhete_pesquisa = ''
+            else:
+                bilhetepesquisa = Bilhete.query.filter(and_(Bilhete.rgcliente.like(f'{rg}'))).all()
+                return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html', bilhete_pesquisa = bilhete_pesquisa)
+
+
+
+@app.route('/templates/menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html', methods=['GET'])
+def carrega_bilhete_funcionario():
+    with app.app_context():
+        return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html')
+
+@app.route('/todos_os_bilhetes_do_funcionario', methods=['POST', 'GET'])
+def pesq_bilhete():
+    with app.app_context():
+        if request.method == 'POST':
+            id_funcionario = request.form['funcionario']
+            if id_funcionario == '':
+                bilhete_pesquisa = ''
+            else:
+                bilhetepesquisa = Bilhete.query.filter(and_(Bilhete.vendedor.like(f'{id_funcionario}'))).all()
+                return render_template('menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html', bilhete_pesquisa = bilhete_pesquisa)
 
 # @app.route('/templates/menu/Funcionario/consultas/todos_os_clientes_por_ano.html', methods=['GET'])
 # def carrega_consultar():

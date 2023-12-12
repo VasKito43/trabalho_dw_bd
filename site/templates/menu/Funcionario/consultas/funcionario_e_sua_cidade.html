@@ -16,8 +16,8 @@
         {% if cidade %}
         <h2>Funcionarios Encontrados:</h2>
             <ul>
-                {% for funcionario in cidade %}
-                    <li>{{ fcodigo }} : {{ funcionario.unome }} - RG: {{ funcionario.rg }} - Codigo: {{ funcionario.fcodigo }}</li>
+                {% for c in cidade %}
+                    <li>{{ fcodigo }} : {{ c.nome }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
