@@ -20,7 +20,7 @@
         <h2>Viagem Encontrados:</h2>
             <ul>
                 {% for viagem in viagem_pesquisa %}
-                    <li>{{ viagem.origem}} {{ viagem.destino }} - {{ viagem.data }} - Horario: {{ viagem.horario }} Codigo: {{ viagem.cviagem }} - Onibus: {{ viagem.nonibus }} - Preço {{viagem.preco}}</li>
+                    <li>{{ nome_origem}} {{ nome_destino }} - data: {{ viagem.data }} - Horario: {{ viagem.horario }} Codigo de viagem: {{ viagem.cviagem }} - Onibus: {{ viagem.nonibus }} - Preço {{viagem.preco}}</li>
                 {% endfor %}
             </ul>
         {% endif %}

@@ -222,11 +222,17 @@ def consulta_viagem():
                 viagem_pesquisa = Viagem.query.all()
             else:
                     cidade_origem = Cidade.query.filter(and_(Cidade.nome.like(f'%{origem}%')))
+                    for i in cidade_origem:
+                        nome_origem = i.nome
+                        cidade_origem = i.ccodigo
                     cidade_destino = Cidade.query.filter(and_(Cidade.nome.like(f'%{destino}%')))
-                    viagem_pesquisa = Viagem.query.filter(and_(Viagem.origem == cidade_origem.ccodigo,
-                                                               Viagem.destino == cidade_destino.ccodigo,
+                    for i in cidade_destino:
+                        nome_destino = i.nome
+                        cidade_destino = i.ccodigo
+                    viagem_pesquisa = Viagem.query.filter(and_(Viagem.origem == cidade_origem,
+                                                               Viagem.destino == cidade_destino,
                                                                Viagem.cviagem == cviagem)).all()
-        return render_template('menu/Funcionario/consultas/consulta_viagem.html', viagem_pesquisa=viagem_pesquisa)
+        return render_template('menu/Funcionario/consultas/consulta_viagem.html', viagem_pesquisa=viagem_pesquisa, nome_destino=nome_destino, nome_origem=nome_origem)
 
 # @app.route('/templates/menu/Funcionario/consultas/empresa_e_sede.html', methods=['GET'])
 # def carrega_consultar():
