@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Bilhete por data</title>
+</head>
+<body>
+    <h2>Consulta Bilhete por data</h2>
+
+    <form action="/consulta_todos_os_clientes_por_data" method="post">
+        <input type="date" name="ano" placeholder="Ano"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if bilhete %}
+        <h2>Bilhetes Encontrados:</h2>
+            <ul>
+                {% for b in bilhete %}
+                    <li> Numero do bilhete: {{b.nbbilhete}}  RG do passageiro: {{b.rgcliente}} Data: {{b.datavenda}} Codigo da viagem: {{b.cviagem}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+    
+</body>
+</html>

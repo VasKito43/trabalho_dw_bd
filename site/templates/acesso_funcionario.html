@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Login funcionario:</h2>
+
+    <form action="/login_funcionario" method="post">
+        <input type="text" name="fcodigo" placeholder="codigo">
+        <input type="text" name="senha" placeholder="senha">
+        <button type="submit">Login</button>
+    </form>
+    
+    {% if mensagem_erro %}
+            <p>{{mensagem_erro}}</p>
+    {% endif %}
+</body>
+</html>
