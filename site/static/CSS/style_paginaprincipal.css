@@ -29,6 +29,13 @@ body.dark {
   --grey-color-light: #aaa;
 }
 
+/**/
+
+#cadast{
+  text-decoration: none;
+  color: var(--blue-color);
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -123,6 +130,7 @@ body.dark {
   padding: 0;
   list-style: none;
 }
+
 .navlink_icon {
   position: relative;
   font-size: 22px;
@@ -132,6 +140,7 @@ body.dark {
   text-align: center;
   border-radius: 6px;
 }
+
 .navlink_icon::before {
   content: "";
   position: absolute;
@@ -139,9 +148,11 @@ body.dark {
   width: calc(100% + 100px);
   left: -20px;
 }
+
 .navlink_icon:hover {
   background: var(--blue-color);
 }
+
 .sidebar .nav_link {
   display: flex;
   align-items: center;
@@ -152,40 +163,51 @@ body.dark {
   color: var(--grey-color);
   white-space: nowrap;
 }
+
 .sidebar.close .navlink {
   display: none;
 }
+
 .nav_link:hover {
   color: var(--white-color);
   background: var(--blue-color);
 }
+
 .sidebar.close .nav_link:hover {
   background: var(--white-color);
 }
+
 .submenu_item {
   cursor: pointer;
 }
+
 .submenu {
   display: none;
 }
+
 .submenu_item .arrow-left {
   position: absolute;
   right: 10px;
   display: inline-block;
   margin-right: auto;
 }
+
 .sidebar.close .submenu {
   display: none;
 }
+
 .show_submenu ~ .submenu {
   display: block;
 }
+
 .show_submenu .arrow-left {
   transform: rotate(90deg);
 }
+
 .submenu .sublink {
   padding: 15px 15px 15px 52px;
 }
+
 .bottom_content {
   position: fixed;
   bottom: 60px;
@@ -194,6 +216,7 @@ body.dark {
   cursor: pointer;
   transition: all 0.5s ease;
 }
+
 .bottom {
   position: absolute;
   display: flex;
@@ -207,25 +230,32 @@ body.dark {
   border-top: 1px solid var(--grey-color-light);
   background-color: var(--white-color);
 }
+
 .bottom i {
   font-size: 20px;
 }
+
 .bottom span {
   font-size: 18px;
 }
+
 .sidebar.close .bottom_content {
   width: 50px;
   left: 15px;
 }
+
 .sidebar.close .bottom span {
   display: none;
 }
+
 .sidebar.hoverable .collapse_sidebar {
   display: none;
 }
+
 #sidebarOpen {
   display: none;
 }
+
 @media screen and (max-width: 768px) {
   #sidebarOpen {
     font-size: 25px;
