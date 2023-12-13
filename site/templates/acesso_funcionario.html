@@ -3,19 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login funcionario</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        :root {
+            --white-color: #fff;
+            --blue-color: #76add0;
+            --grey-color: #707070;
+            --grey-color-light: #aaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            background-color: var(--grey-color-back);
+        }
+
+        h2 {
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--blue-color);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 8px 16px;
+            background-color: var(--blue-color);
+            color: var(--white-color);
+            border: none;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--grey-color);
+        }
+
+        p {
+            color: var(--grey-color);
+            margin-top: 10px;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            text-decoration: none;
+            color: var(--grey-color);
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid var(--grey-color);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: var(--grey-color);
+            color: var(--white-color);
+        }
+    </style>
 </head>
 <body>
     <h2>Login funcionario:</h2>
 
     <form action="/login_funcionario" method="post">
-        <input type="text" name="fcodigo" placeholder="codigo">
-        <input type="text" name="senha" placeholder="senha">
+        <input type="text" name="fcodigo" placeholder="Código">
+        <br>
+        <input type="text" name="senha" placeholder="Senha">
+        <br>
         <button type="submit">Login</button>
     </form>
     
     {% if mensagem_erro %}
-            <p>{{mensagem_erro}}</p>
+        <p>{{mensagem_erro}}</p>
     {% endif %}
+
+    <a href="javascript:history.back()" class="back-link">&#8592; Voltar</a>
 </body>
 </html>
