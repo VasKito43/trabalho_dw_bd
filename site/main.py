@@ -116,6 +116,22 @@ def index():
         todas_tabelas = Viagem.query.all()
         return render_template('pagina_principal.html', tabelas = todas_tabelas)
     
+@app.route('/templates/menu/alunos.html', methods=['GET'])
+def carega_alunos():    
+    with app.app_context():
+        return render_template('menu/alunos.html')    
+    
+@app.route('/templates/menu/conceitos.html', methods=['GET'])
+def carega_conceitos():    
+    with app.app_context():
+        return render_template('/menu/conceitos.html')
+    
+@app.route('/templates/menu/banco_de_dados.html', methods=['GET'])
+def carega_banco_de_dados():    
+    with app.app_context():
+        return render_template('/menu/banco_de_dados.html')
+
+    
 @app.route('/templates/menu/cadastro.html', methods=['GET'])
 def carega_cadastro():    
     with app.app_context():
