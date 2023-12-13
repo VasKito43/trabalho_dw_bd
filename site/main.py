@@ -95,21 +95,6 @@ class Bilhete (db.Model):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route('/')
 def index():
     with app.app_context():
@@ -137,10 +122,10 @@ def carega_cadastro():
     with app.app_context():
         return render_template('menu/cadastro.html')
     
-@app.route('/templates/menu/funcionario.html', methods=['GET'])
+@app.route('/templates/acesso_funcionario.html', methods=['GET'])
 def carrega_funcionario():
     with app.app_context():
-        return render_template('menu/funcionario.html')
+        return render_template('acesso_funcionario.html')
     
 @app.route('/templates/menu/Funcionario/modifica-deleta_cadastro.html', methods=['GET'])
 def carrega_mod_dlt_cad():
@@ -511,6 +496,18 @@ def delete_cliente(rg):
 
 
 
+@app.route('/login_funcionario', methods=['POST'])
+def testa_funcionario():
+    with app.app_context():
+        if request.method == 'POST':
+            fcodigo = request.form['fcodigo']
+            senha = request.form['senha']
+            funcionarios = Funcionario.query.all()
+            for funcionario in funcionarios:
+                if fcodigo == funcionario.fcodigo and senha == funcionario.senha:
+                    return render_template('menu/funcionario.html')
+            mensagem_erro = "Codigo ou Senha está incorreta"
+            return render_template('acesso_funcionario.html', mensagem_erro=mensagem_erro)
 
 
 
@@ -519,3 +516,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         app.run(debug=True)
+
