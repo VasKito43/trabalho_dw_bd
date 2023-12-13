@@ -70,9 +70,7 @@ class Viagem (db.Model):
     cidade_origem = relationship("Cidade", foreign_keys=[origem])
     cidade_destino = relationship("Cidade", foreign_keys=[destino])
     preco = db.Column(db.Integer, nullable=False)
-#    FOREIGN KEY (origem) REFERENCES cidade(ccodigo)
-#    FOREIGN KEY (destino) REFERENCES cidade(ccodigo)
-#    FOREIGN key (nonibus) REFERENCES onibus(nonibus)
+
 
 class Motorista(db.Model):
     pnome = db.Column(db.String(50), nullable=False)
@@ -82,7 +80,6 @@ class Motorista(db.Model):
     nmotorista = db.Column(db.Integer,nullable=False)
     cviagem = db.Column(db.Integer, ForeignKey('viagem.cviagem'), nullable=False)
     viagem = relationship("Viagem")
-    #FOREIGN KEY (cviagem) REFERENCES viagem(cviagem)
 
 class Bilhete (db.Model):
     nbbilhete = db.Column(db.Integer, nullable=False, primary_key=True)
@@ -92,9 +89,26 @@ class Bilhete (db.Model):
     cviagem = db.Column(db.Integer, nullable=False)
     vendedor = db.Column(db.String(10), ForeignKey('funcionario.fcodigo'), nullable=False)
     funcionario = relationship("Funcionario")
-# FOREIGN key (vendedor) REFERENCES funcionario(fcodigo)
-# FOREIGN key (rg_cliente) REFERENCES cliente(rg)
-# FOREIGN KEY (cviagem) REFERENCES viagem(cviagem)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/')
 def index():
@@ -154,6 +168,8 @@ def consulta_cidades_cadastradas():
         return render_template('menu/Funcionario/consultas/cidades_cadastradas.html', cidades_pesquisa=cidades_pesquisa)
     
 
+
+
 #consulta cadastro
 @app.route('/templates/menu/Funcionario/consultas/consulta_cadastro.html', methods=['GET'])
 def carrega_consulta_cadastro():
@@ -180,6 +196,11 @@ def consulta_cadastro():
                                                               Cliente.cpf.like(f'%{cpf}%'))).all()
                           
         return render_template('menu/Funcionario/consultas/consulta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
+    
+    
+    
+    
+    
     
 
 #consulta funcionario
@@ -418,7 +439,7 @@ def consulta_todos_os_clientes_por_data():
 
 
 
-
+#CRUD
 @app.route('/cadastro', methods=['POST'])
 def add_cliente():
     with app.app_context():
