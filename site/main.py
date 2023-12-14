@@ -241,10 +241,9 @@ def consulta_viagem():
         if request.method == 'POST':
             origem = request.form['origem']
             destino = request.form['destino']
-            cviagem = request.form['cviagem']
-            if origem == '' and destino == '' and cviagem == '':
-                viagem_pesquisa = Viagem.query.all()
-            else:
+            cviagem = int(request.form['cviagem'])
+            if origem != '' and destino != '' and cviagem != '':
+
                     cidade_origem = Cidade.query.filter(and_(Cidade.nome.like(f'%{origem}%')))
                     for i in cidade_origem:
                         nome_origem = i.nome
