@@ -194,8 +194,7 @@ def consulta_cadastro():
                 clientes_pesquisa = Cliente.query.filter(and_(Cliente.pnome.like(f'%{nome}%'), 
                                                               Cliente.unome.like(f'%{sobrenome}%'), 
                                                               Cliente.rg.like(f'%{rg}%'),
-                                                              Cliente.cpf.like(f'%{cpf}%'))).all()
-                          
+                                                              Cliente.cpf.like(f'%{cpf}%'))).all()      
         return render_template('menu/Funcionario/consultas/consulta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
     
 #consulta funcionario
@@ -235,9 +234,10 @@ def consulta_viagem():
         if request.method == 'POST':
             origem = request.form['origem']
             destino = request.form['destino']
-            cviagem = int(request.form['cviagem'])
-            if origem != '' and destino != '' and cviagem != '':
-
+            cviagem = request.form['cviagem']
+            if origem == '' and destino == '' and cviagem == '':
+                viagem_pesquisa = Viagem.query.all()
+            else:
                     cidade_origem = Cidade.query.filter(and_(Cidade.nome.like(f'%{origem}%')))
                     for i in cidade_origem:
                         nome_origem = i.nome
@@ -348,6 +348,7 @@ def consulta_empresa_onibus():
                 for i in empresa:
                     nome = i.nome               
                 return render_template('menu/Funcionario/consultas/onibus_e_empresa.html', nonibus=nonibus, placa=placa, classe=classe,  nome=nome)
+            
                
 
          
