@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Bilhete por data</title>
+    <title>Consulta Onibus e empresa</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
@@ -36,9 +36,10 @@
             margin-bottom: 20px;
         }
 
-        input[type="date"] {
-            padding: 8px;
+        input[type="number"] {
+            padding: 10px;
             margin-bottom: 10px;
+            width: 200px; 
         }
 
         button[type="submit"] {
@@ -48,6 +49,7 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px; 
         }
 
         button[type="submit"]:hover {
@@ -81,6 +83,7 @@
             color: var(--white-color);
         }
     </style>
+
 </head>
 <body>
     <h2>Consulta Onibus e empresa</h2>
@@ -93,7 +96,10 @@
         {% if nonibus %}
         <h2>Onibus Encontrados:</h2>
             <ul>
-                    <li> Numero do onibus: {{nonibus}}  Classe: {{classe}} Placa: {{placa}} Empresa: {{nome}}</li>
+                    <li> Numero do onibus: {{nonibus}} </li>
+                    <li> Classe: {{classe}} </li>
+                    <li> Placa: {{placa}} </li>
+                    <li> Empresa: {{nome}} </li>
             </ul>
         {% endif %}
     </form>
