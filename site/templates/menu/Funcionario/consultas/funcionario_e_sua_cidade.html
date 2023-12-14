@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Pesquisar Cadastro</h2>
+    <form method="post" action="/consulta_funcionario_e_sede">
+
+        <input type="text" name="fcodigo" placeholder="Codigo de Funcionario"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if cidade %}
+        <h2>Funcionarios Encontrados:</h2>
+            <ul>
+                {% for c in cidade %}
+                    <li>{{ fcodigo }} : {{ c.nome }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+</body>
+</html>
