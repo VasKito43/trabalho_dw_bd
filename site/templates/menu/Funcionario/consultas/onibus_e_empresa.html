@@ -83,19 +83,17 @@
     </style>
 </head>
 <body>
-    <h2>Consulta Bilhete por data</h2>
+    <h2>Consulta Onibus e empresa</h2>
 
-    <form action="/consulta_todos_os_clientes_por_data" method="post">
-        <input type="date" name="ano" placeholder="Ano"><br>
+    <form action="/consulta_empresa_onibus" method="post">
+        <input type="number" name="nonibus" placeholder="Numero do onibus"><br>
 
         <button type="submit">Pesquisar</button>
 
-        {% if bilhete %}
-        <h2>Bilhetes Encontrados:</h2>
+        {% if nonibus %}
+        <h2>Onibus Encontrados:</h2>
             <ul>
-                {% for b in bilhete %}
-                    <li> Numero do bilhete: {{b.nbbilhete}}  RG do passageiro: {{b.rgcliente}} Data: {{b.datavenda}} Codigo da viagem: {{b.cviagem}}</li>
-                {% endfor %}
+                    <li> Numero do onibus: {{nonibus}}  Classe: {{classe}} Placa: {{placa}} Empresa: {{nome}}</li>
             </ul>
         {% endif %}
     </form>
