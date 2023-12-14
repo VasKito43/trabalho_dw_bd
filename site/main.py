@@ -198,12 +198,6 @@ def consulta_cadastro():
                           
         return render_template('menu/Funcionario/consultas/consulta_cadastro.html', clientes_pesquisa=clientes_pesquisa)
     
-    
-    
-    
-    
-    
-
 #consulta funcionario
 @app.route('/templates/menu/Funcionario/consultas/consulta_funcionario.html', methods=['GET'])
 def carrega_consulta_funcionario():
