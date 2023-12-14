@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Consulta empresa e sede</h2>
+
+    <form action="/consulta_empresa_e_sede" method="post">
+        <input type="name" name="empresa" placeholder="Numero do cnpj"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if nome_cidade %}
+        <h2>Empresas Encontrados:</h2>
+            <ul>
+                    <li> Nome: {{nome_empresa}}  Sede: {{nome_cidade}} </li>
+            </ul>
+        {% endif %}
+    </form>
+    
+</body>
+</html>
