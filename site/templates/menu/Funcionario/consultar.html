@@ -1,23 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="../../menu/Funcionario/consultas/cidades_cadastradas.html">Consultar Cidades Cadastradas</a><br><br>
-    <a href="../../menu/Funcionario/consultas/consulta_cadastro.html">Consultar Cadastro</a><br><br>
-    <a href="../../menu/Funcionario/consultas/consulta_funcionario.html">Consultar Funcionarios</a><br><br>
-    <a href="../../menu/Funcionario/consultas/consulta_viagem.html">Consultar Viagem</a><br><br>
-    <a href="../../menu/Funcionario/consultas/empresa_e_sede.html">Consultar Empresa</a><br><br>
-    <a href="../../menu/Funcionario/consultas/funcionario_e_sua_cidade.html">Consultar Funcionario/Cidade</a><br><br>
-    <a href="../../menu/Funcionario/consultas/motorista_viagem_onibus.html">Consultar Viagem/Motorista/Onibus</a><br><br>
-    <a href="../../menu/Funcionario/consultas/onibus_e_empresa.html">Consultar Onibus</a><br><br>
-    <a href="../../menu/Funcionario/consultas/passageiros_da_viagem.html">Consultar Passagem</a><br><br>
-    <a href="../../menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html">Consultar Bilhetes do Cliente</a><br><br>
-    <a href="../../menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html">Consultar Bilhetes Vendidos pelo Funcionario</a><br><br>
-    <a href="../../menu/Funcionario/consultas/todos_os_clientes_por_ano.html">Consultar Bilhetes do Ultimo Ano</a><br><br>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>pagina_principal</title>
+    <link rel="stylesheet" href="../../../static/CSS/style_consultar.css" />
+  </head>
+  <body>
 
-</body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="logo_item">
+        <i class="bx bx-menu" id="sidebarOpen"></i>
+        <h3 id="topo">Acesso Funcionario</h3>
+      </div>
+      <div class="navbar_content">
+        <i class='bx bx-sun' id="darkLight"></i>
+        <a id="voltar" href="javascript:history.back()" class="back-link">&#8592; Voltar</a>
+      </div>
+
+    </nav>
+
+    <!-- sidebar -->
+    <nav class="sidebar">
+      <div class="menu_content">
+        <ul class="menu_items">
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-home-alt"></i>
+              </span>
+              <span class="navlink">Consultas</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            <ul class="menu_items submenu">
+              <a href="../../menu/Funcionario/consultas/cidades_cadastradas.html" class="nav_link sublink">Consultar Cidades<br>Cadastradas</a>
+              <a href="../../menu/Funcionario/consultas/consulta_cadastro.html" class="nav_link sublink">Consultar Cadastro</a>
+              <a href="../../menu/Funcionario/consultas/consulta_funcionario.html" class="nav_link sublink">Consultar<br>Funcionarios</a>
+              <a href="../../menu/Funcionario/consultas/consulta_viagem.html" class="nav_link sublink">Consultar Viagem</a>
+              <a href="../../menu/Funcionario/consultas/empresa_e_sede.html" class="nav_link sublink">Consultar Empresa</a>
+              <a href="../../menu/Funcionario/consultas/funcionario_e_sua_cidade.html" class="nav_link sublink">Consultar Funcionario<br>Cidade</a>
+              <a href="../../menu/Funcionario/consultas/motorista_viagem_onibus.html" class="nav_link sublink">Consultar Viagem<br>Motorista & Onibus</a>
+              <a href="../../menu/Funcionario/consultas/onibus_e_empresa.html" class="nav_link sublink">Consultar Onibus</a>
+              <a href="../../menu/Funcionario/consultas/passageiros_da_viagem.html" class="nav_link sublink">Consultar Passagem</a>
+              <a href="../../menu/Funcionario/consultas/todos_os_bilhetes_do_cliente.html" class="nav_link sublink">Consultar Bilhetes do<br>Cliente</a>
+              <a href="../../menu/Funcionario/consultas/todos_os_bilhetes_do_funcionario.html" class="nav_link sublink">Consultar Bilhetes<br>Vendidos pelo<br>Funcionario</a>
+              <a href="../../menu/Funcionario/consultas/todos_os_clientes_por_ano.html" class="nav_link sublink">Consultar Bilhetes do<br>Ultimo Ano</a>
+
+            </ul>
+          </li>
+          
+
+        <!-- Fecha e Abre a navbar -->
+        <div class="bottom_content">
+          <div class="bottom expand_sidebar">
+            <span> Expandir</span>
+            <i class='bx bx-log-in' ></i>
+          </div>
+          <div class="bottom collapse_sidebar">
+            <span> Diminuir</span>
+            <i class='bx bx-log-out'></i>
+          </div>
+        </div>
+      </div>   
+    </nav>
+    
+    <!-- JavaScript:) -->
+    <script src="../../../static/JS/pagina_principal.js"></script>
+  </body>
 </html>
+
