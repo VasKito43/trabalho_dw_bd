@@ -29,7 +29,7 @@
             height: 100vh;
             text-align: center;
             flex-direction: column;
-            background-color: var(--grey-color-back);
+            
         }
 
         h2 {
@@ -42,7 +42,7 @@
             margin-bottom: 20px;
         }
 
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
             padding: 8px;
             font-family: "Poppins", sans-serif;
             font-size: 16px;
@@ -91,7 +91,7 @@
     <form action="/login_funcionario" method="post">
         <input type="text" name="fcodigo" placeholder="Código">
         <br>
-        <input type="text" name="senha" placeholder="Senha">
+        <input type="password" name="senha" placeholder="Senha">
         <br>
         <button type="submit">Login</button>
     </form>

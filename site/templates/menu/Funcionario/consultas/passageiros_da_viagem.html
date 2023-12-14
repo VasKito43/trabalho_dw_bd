@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Consulta Passageiros da Viagem</h2>
+
+    <form action="/consulta_passageiros_viagem" method="post">
+        <input type="number" name="cviagem" placeholder="Codigo de viagem"><br>
+
+        <button type="submit">Pesquisar</button>
+
+        {% if cliente_list %}
+        <h2>Passageiros Encontrados:</h2>
+            <ul>
+                {% for cliente in cliente_list %}
+                    {% for c in cliente %}
+                    <li>Passageiros: {{c.pnome}} {{c.unome}}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+    
+</body>
+</html>
